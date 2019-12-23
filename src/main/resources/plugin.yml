@@ -1,0 +1,10 @@
+main: me.wsman217.crazyreference.CrazyReference
+name: CrazyReference
+version: ${project.version}
+author: wsman217
+
+commands:
+  getcode:
+    description: Get a reference code.
+  redeemcode:
+    description: Redeem a reference code.
