@@ -294,7 +294,7 @@ public class FileManager {
 		
 		//ENUM_NAME("FileName.yml", "FilePath.yml"),
 		//MESSAGE("messages.yml", "messages.yml");
-		;
+		PRIZES("prizes.yml", "prizes.yml");
 		
 		private String fileName;
 		private String fileLocation;
