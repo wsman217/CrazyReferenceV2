@@ -3,6 +3,7 @@ package me.wsman217.crazyreference.commands;
 import me.wsman217.crazyreference.refercode.GetCode;
 import me.wsman217.crazyreference.tools.CommandTools;
 import org.bukkit.ChatColor;
+import org.bukkit.Statistic;
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandExecutor;
 import org.bukkit.command.CommandSender;
@@ -17,6 +18,14 @@ public class CommandRedeemCode implements CommandExecutor {
         if (args.length < 1) {
             //TODO add message.yml
             p.sendMessage(ChatColor.RED + "More arguments are required for this command.");
+            return true;
+        }
+        int playTime = p.getStatistic(Statistic.PLAY_ONE_MINUTE);
+        double minutesPlayed = (((double) playTime) / 20d) / 60d;
+        //TODO make the time configurable
+        if (minutesPlayed > 15) {
+            //TODO add message.yml
+            p.sendMessage(ChatColor.RED + "You can not use this command if you have played more than 15 minutes!");
             return true;
         }
         Player inviter = GetCode.getPlayer(args[0]);

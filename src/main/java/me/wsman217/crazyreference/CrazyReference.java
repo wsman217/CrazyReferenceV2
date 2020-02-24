@@ -2,6 +2,7 @@ package me.wsman217.crazyreference;
 
 import me.wsman217.crazyreference.commands.CommandGetCode;
 import me.wsman217.crazyreference.commands.CommandRedeemCode;
+import me.wsman217.crazyreference.database.Database;
 import me.wsman217.crazyreference.tools.FileManager;
 import org.bstats.bukkit.Metrics;
 import org.bukkit.plugin.PluginManager;
@@ -16,6 +17,7 @@ public class CrazyReference extends JavaPlugin {
     @Override
     public void onEnable() {
         instance = this;
+        Database db = new Database().openDatabaseConnection();
         bStats = new Metrics(this);
 
         fileManager = FileManager.getInstance().logInfo(true).setup(this);
