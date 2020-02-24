@@ -8,10 +8,10 @@ import org.bukkit.ChatColor;
 import org.bukkit.Material;
 import org.bukkit.configuration.file.FileConfiguration;
 import org.bukkit.enchantments.Enchantment;
-import org.bukkit.entity.Player;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.meta.ItemMeta;
 
+import java.lang.annotation.ElementType;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
@@ -53,6 +53,7 @@ public class PrizeManagerTemp {
             for (String str : prizeYML.getStringList(path + "Enchants")) {
                 String enchantName = str.substring(0, str.indexOf(':'));
                 int level = GenericTools.isNumber(str.substring(str.indexOf(":") + 1)) ? Integer.parseInt(str.substring(str.indexOf(":") + 1)) : 1;
+
                 im.addEnchant(Objects.requireNonNull(Enchantment.getByName(enchantName)), level, true);
             }
             im.setCustomModelData(prizeYML.getInt(path + "CustomModelData"));

@@ -1,4 +1,6 @@
-package me.wsman217.crazyreference.databases.iptable;
+package me.wsman217.crazyreference.database.iptable;
+
+import me.wsman217.crazyreference.database.DataBase;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
@@ -7,18 +9,18 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.UUID;
 
-public class DataHandler {
+public class DataHandlerIP {
 
-    private me.wsman217.crazyreference.databases.iptable.DataBase db;
+    private DataBase db;
 
-    public DataHandler(me.wsman217.crazyreference.databases.iptable.DataBase db) {
+    public DataHandlerIP(DataBase db) {
         this.db = db;
     }
 
-    public DataHandler generateTables() {
+    public DataHandlerIP generateTables() {
         Connection conn = this.db.getConnection();
         try {
-            PreparedStatement ps = conn.prepareStatement("CREATE TABLE IF NOT EXISTS ip_table(ip TEXT PRIMARY KEY, id VARCHAR(40))");
+            PreparedStatement ps = conn.prepareStatement("CREATE TABLE IF NOT EXISTS ip_table(ip VARCHAR(16) PRIMARY KEY, id VARCHAR(40))");
             ps.execute();
             ps.close();
             conn.close();

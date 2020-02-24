@@ -1,4 +1,4 @@
-package me.wsman217.crazyreference.databases.iptable;
+package me.wsman217.crazyreference.database;
 
 import me.wsman217.crazyreference.CrazyReference;
 import org.bukkit.configuration.file.FileConfiguration;
@@ -13,17 +13,21 @@ public class DataBase {
     private Connection connection;
     private CrazyReference plugin = CrazyReference.getInstance();
 
+    public DataBase() {
+        this.openDatabaseConnection();
+    }
+
     public void openDatabaseConnection() {
         FileConfiguration config = plugin.getConfig();
         try {
-            if (config.getBoolean("SQLite")) {
+            if (config.getBoolean("Database.SQLite")) {
                 try {
                     Class.forName("org.sqlite.JDBC");
                 } catch (ClassNotFoundException classNotFoundException) {
                     classNotFoundException.printStackTrace();
                 }
                 File file = new File(
-                        String.valueOf(plugin.getDataFolder().toString()) + File.separator + "playernotes.db");
+                        plugin.getDataFolder().toString() + File.separator + "CrazyReference.db");
                 if (!file.exists()) {
                     try {
                         file.createNewFile();
@@ -34,9 +38,9 @@ public class DataBase {
                 connection = DriverManager.getConnection("jdbc:sqlite:" + file.getAbsolutePath());
             } else {
                 connection = DriverManager.getConnection(
-                        "jdbc:mysql://" + config.getString("SQL.Host") + ":" + config.getString("SQL.Port") + "/"
-                                + config.getString("SQL.Database"),
-                        config.getString("SQL.User"), config.getString("SQL.Password"));
+                        "jdbc:mysql://" + config.getString("Database.SQL.Host") + ":" + config.getString("Database.SQL.Port") + "/"
+                                + config.getString("Database.SQL.Database"),
+                        config.getString("Database.SQL.User"), config.getString("Database.SQL.Password"));
             }
         } catch (SQLException sQLException) {
             System.out.println("ERROR CONNECTING TO DATABASE!");
