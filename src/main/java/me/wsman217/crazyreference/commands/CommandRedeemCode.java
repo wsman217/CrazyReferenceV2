@@ -1,5 +1,6 @@
 package me.wsman217.crazyreference.commands;
 
+import me.wsman217.crazyreference.CrazyReference;
 import me.wsman217.crazyreference.refercode.GetCode;
 import me.wsman217.crazyreference.tools.CommandTools;
 import org.bukkit.ChatColor;
@@ -8,6 +9,10 @@ import org.bukkit.command.Command;
 import org.bukkit.command.CommandExecutor;
 import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
+
+import java.util.ArrayList;
+import java.util.Objects;
+import java.util.UUID;
 
 public class CommandRedeemCode implements CommandExecutor {
     @Override
@@ -39,6 +44,24 @@ public class CommandRedeemCode implements CommandExecutor {
             p.sendMessage(ChatColor.RED + "You can not use your own code!");
             return true;
         }
+
+        ArrayList<String> ipsOfInviter = CrazyReference.ipHandler.findById(inviter.getUniqueId());
+        ArrayList<String> ipsOfUser = CrazyReference.ipHandler.findById(p.getUniqueId());
+
+        boolean isGood = true;
+        invLoop: for (String ipInv: ipsOfInviter)
+            for (String ipUse : ipsOfUser)
+                if (ipInv.equals(ipUse)) {
+                    isGood = false;
+                    break invLoop;
+                }
+
+        if (!isGood) {
+            //TODO add message.yml
+            p.sendMessage(ChatColor.RED + "The user that referred you has already played on this ip address.");
+            return true;
+        }
+
         //TODO add code for the prizes for now we will just send them a message
         p.sendMessage(ChatColor.AQUA + "SUCCESS!");
         return true;

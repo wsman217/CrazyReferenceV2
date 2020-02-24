@@ -1,0 +1,44 @@
+Broadcast:
+  Enabled: true
+  Message:
+    - "&5%referrer% has just referred %referred% to the server!"
+
+Referrer:
+  Items:
+    #This is a name you make yourself
+    ReferrerSword:
+      Item: "diamond_sword"
+      Amount: 1
+      Name: "&dThe Sword of Referrer"
+      Lore:
+        - "&eOnly granted to those who bring"
+        - "&enew players to the server"
+      Enchants:
+        - "sharpness:6"
+        - "knockback:3"
+        - "unbreaking:4"
+        - "fire_aspect:3"
+        - "looting:4"
+      CustomModelData: 1
+  Commands:
+    - "give %referrer% iron_ingot 16"
+
+Referral:
+  Items:
+    #This is a name you make yourself
+    ReferralSword:
+      Item: "diamond_sword"
+      Amount: 1
+      Name: "&dThe Sword of Referral"
+      Lore:
+        - "&eOnly granted to those who have"
+        - "&ebeen brought by another player."
+      Enchants:
+        - "sharpness:6"
+        - "knockback:3"
+        - "unbreaking:4"
+        - "fire_aspect:3"
+        - "looting:4"
+      CustomModelData: 1
+  Commands:
+    - "give %referral% iron_ingot 16"
