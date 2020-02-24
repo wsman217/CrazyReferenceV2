@@ -2,6 +2,7 @@ package me.wsman217.crazyreference;
 
 import me.wsman217.crazyreference.commands.CommandGetCode;
 import me.wsman217.crazyreference.commands.CommandRedeemCode;
+import me.wsman217.crazyreference.databases.iptable.DataHandler;
 import me.wsman217.crazyreference.tools.FileManager;
 import org.bstats.bukkit.Metrics;
 import org.bukkit.plugin.PluginManager;
@@ -9,6 +10,7 @@ import org.bukkit.plugin.java.JavaPlugin;
 
 public class CrazyReference extends JavaPlugin {
 
+    public static DataHandler ipHandler;
     public Metrics bStats;
     private static CrazyReference instance;
     private FileManager fileManager;
