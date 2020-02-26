@@ -1,29 +1,29 @@
-package me.wsman217.crazyreference.database.users;
+package me.wsman217.crazyreference.database.leaderboard;
 
 import me.wsman217.crazyreference.database.DataBase;
 import me.wsman217.crazyreference.tools.GenericTools;
 import org.bukkit.ChatColor;
 
 import java.sql.Connection;
-import java.sql.DatabaseMetaData;
 import java.sql.PreparedStatement;
 import java.sql.SQLException;
 
-public class DataHandlerUsers {
-
+public class DataHandlerLeaderboard {
     private DataBase db;
 
-    public DataHandlerUsers(DataBase db) {
+    public DataHandlerLeaderboard(DataBase db) {
         this.db = db;
     }
 
-    public DataHandlerUsers generateTables() {
+    public DataHandlerLeaderboard generateTables() {
         Connection conn = this.db.getConnection();
         try {
-            GenericTools.sendConsoleMessageWithVerbose(ChatColor.WHITE + "User table generating.");
-            PreparedStatement ps = conn.prepareStatement("CREATE TABLE IF NOT EXISTS users(" +
+            GenericTools.sendConsoleMessageWithVerbose(ChatColor.WHITE + "Leaderboard table generating.");
+            PreparedStatement ps = conn.prepareStatement("CREATE TABLE IF NOT EXISTS leaderboard(" +
                     "id INTEGER " + db.getAutoInc(conn) + " PRIMARY KEY, " +
-                    "uuid VARCHAR(36) NOT NULL)");
+                    "user_id INTEGER, " +
+                    "total_references INTEGER, " +
+                    "FOREIGN KEY(user_id) REFERENCES users(id))");
             ps.execute();
             ps.close();
             conn.close();

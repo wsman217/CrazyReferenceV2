@@ -8,3 +8,4 @@ Database:
     Database: "db"
     User: "root"
     Password: "toor"
+Verbose: true

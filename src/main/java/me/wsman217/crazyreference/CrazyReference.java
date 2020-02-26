@@ -3,7 +3,10 @@ package me.wsman217.crazyreference;
 import me.wsman217.crazyreference.commands.CommandGetCode;
 import me.wsman217.crazyreference.commands.CommandRedeemCode;
 import me.wsman217.crazyreference.database.DataBase;
+import me.wsman217.crazyreference.database.balance.DataHandlerBalance;
+import me.wsman217.crazyreference.database.invites.DataHandlerInvites;
 import me.wsman217.crazyreference.database.iptable.DataHandlerIP;
+import me.wsman217.crazyreference.database.leaderboard.DataHandlerLeaderboard;
 import me.wsman217.crazyreference.database.users.DataHandlerUsers;
 import me.wsman217.crazyreference.handlers.JoinEvent;
 import me.wsman217.crazyreference.tools.FileManager;
@@ -19,6 +22,10 @@ public class CrazyReference extends JavaPlugin {
     private DataBase db;
 
     public static DataHandlerIP ipHandler;
+    public static DataHandlerUsers userHandler;
+    public static DataHandlerBalance balanceHandler;
+    public static DataHandlerInvites inviteHandler;
+    public static DataHandlerLeaderboard leaderboardHandler;
 
     @Override
     public void onEnable() {
@@ -46,8 +53,11 @@ public class CrazyReference extends JavaPlugin {
     }
 
     private void initDatabases() {
-        this.ipHandler = new DataHandlerIP(db).generateTables();
-        DataHandlerUsers userHandler = new DataHandlerUsers(db).generateTables();
+        ipHandler = new DataHandlerIP(db).generateTables();
+        userHandler = new DataHandlerUsers(db).generateTables();
+        balanceHandler = new DataHandlerBalance(db).generateTables();
+        inviteHandler = new DataHandlerInvites(db).generateTables();
+        leaderboardHandler = new DataHandlerLeaderboard(db).generateTables();
     }
 
     public static CrazyReference getInstance() {

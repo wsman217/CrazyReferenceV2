@@ -1,6 +1,8 @@
 package me.wsman217.crazyreference.database.iptable;
 
 import me.wsman217.crazyreference.database.DataBase;
+import me.wsman217.crazyreference.tools.GenericTools;
+import org.bukkit.ChatColor;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
@@ -20,7 +22,12 @@ public class DataHandlerIP {
     public DataHandlerIP generateTables() {
         Connection conn = this.db.getConnection();
         try {
-            PreparedStatement ps = conn.prepareStatement("CREATE TABLE IF NOT EXISTS ip_table(ip VARCHAR(16) PRIMARY KEY, id VARCHAR(40))");
+            GenericTools.sendConsoleMessageWithVerbose(ChatColor.WHITE + "IP table generating.");
+            PreparedStatement ps = conn.prepareStatement("CREATE TABLE IF NOT EXISTS ip_table(" +
+                    "id INTEGER " + db.getAutoInc(conn) + " PRIMARY KEY, " +
+                    "user_id INTEGER, " +
+                    "address VARCHAR(16) NOT NULL, " +
+                    "FOREIGN KEY(user_id) REFERENCES users(id))");
             ps.execute();
             ps.close();
             conn.close();
@@ -34,10 +41,10 @@ public class DataHandlerIP {
         Connection conn = this.db.getConnection();
         ArrayList<UUID> uuids = new ArrayList<>();
         try {
-            PreparedStatement ps = conn.prepareStatement("SELECT * FROM ip_table WHERE ip='" + ip + "'");
+            PreparedStatement ps = conn.prepareStatement("SELECT * FROM ip_table WHERE address='" + ip + "'");
             ResultSet rs = ps.executeQuery();
             if (rs.next())
-                for (String str : rs.getString("ip").split(","))
+                for (String str : rs.getString("address").split(","))
                     uuids.add(UUID.fromString(str));
             ps.close();
             conn.close();
@@ -50,11 +57,11 @@ public class DataHandlerIP {
     public void insert(String ip, UUID id) {
         Connection conn = this.db.getConnection();
         try {
-            PreparedStatement getIds = conn.prepareStatement("SELECT * FROM ip_table WHERE ip='" + ip + "'");
+            PreparedStatement getIds = conn.prepareStatement("SELECT * FROM ip_table WHERE address='" + ip + "'");
             ResultSet idRs = getIds.executeQuery();
             String ids = "";
             if (idRs.next())
-                ids = idRs.getString("id");
+                ids = idRs.getString("address");
             PreparedStatement replaceInto = conn.prepareStatement("REPLACE INTO ip_table VALUES(?,?)");
             replaceInto.setString(1, ip);
             if (ids.length() > 0)

@@ -36,7 +36,7 @@ public class FileManager {
 	 * @param plugin The plugin this is getting loading for.
 	 */
 	public FileManager setup(Plugin plugin) {
-		prefix = "[" + plugin.getName() + "] ";
+		prefix = Constants.prefix;
 		this.plugin = plugin;
 		if(!plugin.getDataFolder().exists()) {
 			plugin.getDataFolder().mkdirs();
@@ -294,7 +294,8 @@ public class FileManager {
 		
 		//ENUM_NAME("FileName.yml", "FilePath.yml"),
 		//MESSAGE("messages.yml", "messages.yml");
-		PRIZES("prizes.yml", "prizes.yml");
+		PRIZES("prizes.yml", "prizes.yml"),
+		CONFIG("config.yml", "config.yml");
 		
 		private String fileName;
 		private String fileLocation;

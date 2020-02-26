@@ -67,4 +67,12 @@ public class DataBase {
         }
         return connection;
     }
+
+    public String getAutoInc(Connection conn) throws SQLException {
+        return isSQLite(conn) ? "IDENTITY" : "AUTO_INCREMENT";
+    }
+
+    private boolean isSQLite(Connection conn) throws SQLException {
+        return conn.getMetaData().getDriverName().equalsIgnoreCase("SQLite JDBC");
+    }
 }

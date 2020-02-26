@@ -12,8 +12,8 @@ public class GetCode {
             return new Code(p.getUniqueId().toString());
         } catch (InvalidCodeException e) {
             e.printStackTrace();
+            return null;
         }
-        return null;
     }
 
     public static Player getPlayer(String code) {

@@ -11,7 +11,7 @@ public class CommandTools {
             return true;
         }
         Player p = (Player) sender;
-        if (!p.hasPermission("crazyreference.commands.getcode")) {
+        if (!p.hasPermission(permission)) {
             //todo add a messages.yml so you can change this.
             p.sendMessage(ChatColor.RED + "You do not have permission to use this command!");
             return true;

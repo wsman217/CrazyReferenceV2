@@ -11,14 +11,13 @@ import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
 
 import java.util.ArrayList;
-import java.util.Objects;
-import java.util.UUID;
 
 public class CommandRedeemCode implements CommandExecutor {
     @Override
     public boolean onCommand(CommandSender sender, Command command, String s, String[] args) {
         if (CommandTools.CommandCheck(sender, "crazyreference.commands.redeemcode"))
             return true;
+
         Player p = (Player) sender;
         if (args.length < 1) {
             //TODO add message.yml

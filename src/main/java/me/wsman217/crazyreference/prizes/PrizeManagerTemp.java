@@ -54,7 +54,7 @@ public class PrizeManagerTemp {
                 String enchantName = str.substring(0, str.indexOf(':'));
                 int level = GenericTools.isNumber(str.substring(str.indexOf(":") + 1)) ? Integer.parseInt(str.substring(str.indexOf(":") + 1)) : 1;
 
-                im.addEnchant(Objects.requireNonNull(Enchantment.getByName(enchantName)), level, true);
+                /*im.addEnchant(Objects.requireNonNull(Enchantment.getByName(enchantName)), level, true);*/
             }
             im.setCustomModelData(prizeYML.getInt(path + "CustomModelData"));
             item.setItemMeta(im);
