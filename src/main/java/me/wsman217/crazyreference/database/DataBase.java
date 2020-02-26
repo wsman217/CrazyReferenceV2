@@ -1,6 +1,7 @@
 package me.wsman217.crazyreference.database;
 
 import me.wsman217.crazyreference.CrazyReference;
+import me.wsman217.crazyreference.tools.FileManager;
 import org.bukkit.configuration.file.FileConfiguration;
 
 import java.io.File;
@@ -69,10 +70,10 @@ public class DataBase {
     }
 
     public String getAutoInc(Connection conn) throws SQLException {
-        return isSQLite(conn) ? "IDENTITY" : "AUTO_INCREMENT";
+        return isSQLite() ? "AUTOINCREMENT" : "AUTO_INCREMENT";
     }
 
-    private boolean isSQLite(Connection conn) throws SQLException {
-        return conn.getMetaData().getDriverName().equalsIgnoreCase("SQLite JDBC");
+    public boolean isSQLite() {
+        return plugin.getFileManager().getFile(FileManager.Files.CONFIG).getBoolean("Database.SQLite");
     }
 }

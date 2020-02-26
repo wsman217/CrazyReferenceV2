@@ -21,9 +21,10 @@ public class DataHandlerInvites {
         try {
             GenericTools.sendConsoleMessageWithVerbose(ChatColor.WHITE + "Invite table generating.");
             PreparedStatement ps = conn.prepareStatement("CREATE TABLE IF NOT EXISTS invites(" +
-                    "id INTEGER " + db.getAutoInc(conn) + " PRIMARY KEY, " +
-                    "referer INTEGER, " +
-                    "referee INTEGER, " +
+                    "id INTEGER " + (db.isSQLite() ? "" : "UNSIGNED") + " PRIMARY KEY " + db.getAutoInc(conn) + ", " +
+                    "referer INTEGER(11)" + (db.isSQLite() ? "," : " UNSIGNED, ") +
+                    "referee INTEGER(11)" + (db.isSQLite() ? "," : " UNSIGNED, ") +
+                    "date " + (db.isSQLite() ? "TEXT" : "TIMESTAMP") + ", " +
                     "FOREIGN KEY(referer) REFERENCES users(id)," +
                     "FOREIGN KEY(referee) REFERENCES users(id))");
             ps.execute();

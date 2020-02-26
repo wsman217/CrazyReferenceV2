@@ -1,5 +1,7 @@
 Database:
-  #SQLite is the default database, it is recommended to use an MySQL or MariaDB database but SQLite works in place of one.
+  #SQLite is the default database.
+  #The databases I have personally tested my plugin on are MySQL, MariaDB, and SQLite, so if you have any other type of
+  #Database and there is an error please let me know through my Discord.
   SQLite: true
   #If SQLite is true this does not matter.
   SQL:

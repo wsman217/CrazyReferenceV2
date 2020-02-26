@@ -13,5 +13,11 @@
       <jdbc-driver>org.mariadb.jdbc.Driver</jdbc-driver>
       <jdbc-url>jdbc:mariadb://178.63.127.184:3306/s1142_referral</jdbc-url>
     </data-source>
+    <data-source source="LOCAL" name="SQLiteReference" uuid="d099d621-9f30-4105-9aa0-9263035d5d0f">
+      <driver-ref>sqlite.xerial</driver-ref>
+      <synchronize>true</synchronize>
+      <jdbc-driver>org.sqlite.JDBC</jdbc-driver>
+      <jdbc-url>jdbc:sqlite:D:\DevServers\1.14.4Server\plugins\CrazyReference\CrazyReference.db</jdbc-url>
+    </data-source>
   </component>
 </project>

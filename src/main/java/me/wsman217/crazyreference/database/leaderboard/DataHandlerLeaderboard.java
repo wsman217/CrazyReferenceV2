@@ -20,8 +20,7 @@ public class DataHandlerLeaderboard {
         try {
             GenericTools.sendConsoleMessageWithVerbose(ChatColor.WHITE + "Leaderboard table generating.");
             PreparedStatement ps = conn.prepareStatement("CREATE TABLE IF NOT EXISTS leaderboard(" +
-                    "id INTEGER " + db.getAutoInc(conn) + " PRIMARY KEY, " +
-                    "user_id INTEGER, " +
+                    "user_id INTEGER(11) " + (db.isSQLite() ? "" : "UNSIGNED") + " PRIMARY KEY, " +
                     "total_references INTEGER, " +
                     "FOREIGN KEY(user_id) REFERENCES users(id))");
             ps.execute();

@@ -23,7 +23,7 @@ public class DataHandlerUsers {
         try {
             GenericTools.sendConsoleMessageWithVerbose(ChatColor.WHITE + "User table generating.");
             PreparedStatement ps = conn.prepareStatement("CREATE TABLE IF NOT EXISTS users(" +
-                    "id INTEGER " + db.getAutoInc(conn) + " PRIMARY KEY, " +
+                    "id INTEGER " + (db.isSQLite() ? "" : "UNSIGNED") + "PRIMARY KEY " + db.getAutoInc(conn) + ", " +
                     "uuid VARCHAR(36) NOT NULL)");
             ps.execute();
             ps.close();
@@ -46,19 +46,27 @@ public class DataHandlerUsers {
         return false;
     }
 
-    public void insert(Player p) {
+    public int insert(Player p) {
         Connection conn = this.db.getConnection();
+        int output = -1;
         try {
             if (!contains(p)) {
                 PreparedStatement ps = conn.prepareStatement("INSERT INTO users (uuid) VALUES(?)");
                 ps.setString(1, p.getUniqueId().toString());
                 ps.execute();
                 ps.close();
+                PreparedStatement select = conn.prepareStatement("SELECT id FROM users WHERE id=LAST_INSERT_ID()");
+                ResultSet rs = select.executeQuery();
+                if (rs.next())
+                    output = rs.getInt("id");
+                select.close();
+                rs.close();
                 conn.close();
             }
         } catch (SQLException e) {
             e.printStackTrace();
         }
+        return output;
     }
 
     public int getID(Player p) {

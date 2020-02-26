@@ -53,8 +53,8 @@ public class CrazyReference extends JavaPlugin {
     }
 
     private void initDatabases() {
-        ipHandler = new DataHandlerIP(db).generateTables();
         userHandler = new DataHandlerUsers(db).generateTables();
+        ipHandler = new DataHandlerIP(db).generateTables();
         balanceHandler = new DataHandlerBalance(db).generateTables();
         inviteHandler = new DataHandlerInvites(db).generateTables();
         leaderboardHandler = new DataHandlerLeaderboard(db).generateTables();

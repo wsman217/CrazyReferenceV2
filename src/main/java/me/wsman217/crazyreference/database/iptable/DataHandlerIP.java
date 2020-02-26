@@ -24,8 +24,7 @@ public class DataHandlerIP {
         try {
             GenericTools.sendConsoleMessageWithVerbose(ChatColor.WHITE + "IP table generating.");
             PreparedStatement ps = conn.prepareStatement("CREATE TABLE IF NOT EXISTS ip_table(" +
-                    "id INTEGER " + db.getAutoInc(conn) + " PRIMARY KEY, " +
-                    "user_id INTEGER, " +
+                    "user_id INTEGER(11) " + (db.isSQLite() ? "" : "UNSIGNED") + " PRIMARY KEY, " +
                     "address VARCHAR(16) NOT NULL, " +
                     "FOREIGN KEY(user_id) REFERENCES users(id))");
             ps.execute();
