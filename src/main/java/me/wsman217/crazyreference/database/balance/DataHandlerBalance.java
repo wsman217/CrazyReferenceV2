@@ -8,6 +8,7 @@ import org.bukkit.event.inventory.PrepareItemCraftEvent;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
+import java.sql.ResultSet;
 import java.sql.SQLException;
 
 public class DataHandlerBalance {
@@ -39,14 +40,13 @@ public class DataHandlerBalance {
     public boolean contains(Player p) {
         Connection conn = this.db.getConnection();
         try {
-            PreparedStatement ps = conn.prepareStatement("");
-        } catch(SQLException e) {
+            PreparedStatement ps = conn.prepareStatement("SELECT * FROM balance INNER JOIN " +
+                    "users ON (balance.user_id=users.id) WHERE uuid='" + p.getUniqueId().toString() + "'");
+            ResultSet rs = ps.executeQuery();
+            return rs.next();
+        } catch (SQLException e) {
             e.printStackTrace();
         }
-        return true;
-    }
-
-    public boolean insert(Player p, double addTo) {
-        return true;
+        return false;
     }
 }

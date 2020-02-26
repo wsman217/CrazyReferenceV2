@@ -1,10 +1,10 @@
 Database:
-  #SQLite is the default database, it is recommended to use an SQL but SQLite works in place of one.
+  #SQLite is the default database, it is recommended to use an MySQL or MariaDB database but SQLite works in place of one.
   SQLite: true
   #If SQLite is true this does not matter.
   SQL:
     Host: "local_host"
-    Port: "port"
+    Port: "3306"
     Database: "db"
     User: "root"
     Password: "toor"

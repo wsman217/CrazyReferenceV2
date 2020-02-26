@@ -1,5 +1,6 @@
 package me.wsman217.crazyreference.commands;
 
+import me.wsman217.crazyreference.CrazyReference;
 import me.wsman217.crazyreference.refercode.GetCode;
 import me.wsman217.crazyreference.tools.CommandTools;
 import net.md_5.bungee.api.chat.ClickEvent;
@@ -28,6 +29,7 @@ public class CommandGetCode implements CommandExecutor {
         message.setClickEvent(new ClickEvent(ClickEvent.Action.SUGGEST_COMMAND, code.value));
         p.spigot().sendMessage(message);
 
+        CrazyReference.balanceHandler.contains(p);
         return true;
     }
 }

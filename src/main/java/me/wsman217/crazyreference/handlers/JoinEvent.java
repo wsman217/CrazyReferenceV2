@@ -9,6 +9,6 @@ public class JoinEvent implements Listener {
 
     @EventHandler
     public void playerPreJoinEvent(PlayerLoginEvent e) {
-        CrazyReference.ipHandler.insert(e.getRealAddress().toString(), e.getPlayer().getUniqueId());
+        /*CrazyReference.ipHandler.insert(e.getRealAddress().toString(), e.getPlayer().getUniqueId());*/
     }
 }
