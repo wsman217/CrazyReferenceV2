@@ -27,6 +27,9 @@ public class CrazyReference extends JavaPlugin {
     public static DataHandlerInvites inviteHandler;
     public static DataHandlerLeaderboard leaderboardHandler;
 
+    /**
+     * Where Spigot will enter the plugin.
+     */
     @Override
     public void onEnable() {
         this.saveDefaultConfig();
@@ -35,24 +38,40 @@ public class CrazyReference extends JavaPlugin {
 
         fileManager = FileManager.getInstance().logInfo(true).setup(this);
 
-        db = new DataBase();
-
         initCommands();
         initListeners();
         initDatabases();
     }
 
+    /**
+     * Where Spigot will exit the plugin.
+     */
+    @Override
+    public void onDisable() {
+        db.closeConnection();
+    }
+
+    /**
+     * Initialize all the commands and command objects as needed.
+     */
     private void initCommands() {
         this.getCommand("getcode").setExecutor(new CommandGetCode());
         this.getCommand("redeemcode").setExecutor(new CommandRedeemCode());
     }
 
+    /**
+     * Initialize all the listeners and listener objects as needed.
+     */
     private void initListeners() {
         PluginManager pman = this.getServer().getPluginManager();
         pman.registerEvents(new JoinEvent(), this);
     }
 
+    /**
+     * Initialize all of the databases, generate the tables, and create the database objects.
+     */
     private void initDatabases() {
+        db = new DataBase();
         userHandler = new DataHandlerUsers(db).generateTables();
         ipHandler = new DataHandlerIP(db).generateTables();
         balanceHandler = new DataHandlerBalance(db).generateTables();
@@ -60,10 +79,20 @@ public class CrazyReference extends JavaPlugin {
         leaderboardHandler = new DataHandlerLeaderboard(db).generateTables();
     }
 
+    /**
+     * Gets the CrazyReference instance.
+     *
+     * @return the CrazyReference instance.
+     */
     public static CrazyReference getInstance() {
         return instance;
     }
 
+    /**
+     * Gets the FileManager instance.
+     *
+     * @return the FileManager instance.
+     */
     public FileManager getFileManager() {
         return fileManager;
     }

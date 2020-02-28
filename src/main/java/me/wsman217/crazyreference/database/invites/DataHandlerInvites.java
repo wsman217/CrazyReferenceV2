@@ -1,7 +1,6 @@
 package me.wsman217.crazyreference.database.invites;
 
 import me.wsman217.crazyreference.database.DataBase;
-import me.wsman217.crazyreference.database.balance.DataHandlerBalance;
 import me.wsman217.crazyreference.tools.GenericTools;
 import org.bukkit.ChatColor;
 

@@ -18,6 +18,9 @@ public class DataBase {
         this.openDatabaseConnection();
     }
 
+    /**
+     * Open the connection to the database. Should stay open until the plugin disables.
+     */
     public void openDatabaseConnection() {
         FileConfiguration config = plugin.getConfig();
         try {
@@ -49,6 +52,9 @@ public class DataBase {
         }
     }
 
+    /**
+     * Close the connection to the database.
+     */
     public void closeConnection() {
         try {
             connection.close();
@@ -58,6 +64,11 @@ public class DataBase {
         }
     }
 
+    /**
+     * Get the connection to the database.
+     *
+     * @return the connection to the database.
+     */
     public Connection getConnection() {
         try {
             if (connection == null || connection.isClosed()) {
@@ -69,10 +80,20 @@ public class DataBase {
         return connection;
     }
 
-    public String getAutoInc(Connection conn) throws SQLException {
+    /**
+     * Gets the keyword for an auto incrementing integer in the given SQL syntax.
+     *
+     * @return the correct keyword for the given SQL syntax.
+     */
+    public String getAutoInc() {
         return isSQLite() ? "AUTOINCREMENT" : "AUTO_INCREMENT";
     }
 
+    /**
+     * Test if the database is an SQLite connection of SQL connection.
+     *
+     * @return true if the database is SQLite and false if its not.
+     */
     public boolean isSQLite() {
         return plugin.getFileManager().getFile(FileManager.Files.CONFIG).getBoolean("Database.SQLite");
     }

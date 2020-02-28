@@ -23,7 +23,7 @@ public class DataHandlerUsers {
         try {
             GenericTools.sendConsoleMessageWithVerbose(ChatColor.WHITE + "User table generating.");
             PreparedStatement ps = conn.prepareStatement("CREATE TABLE IF NOT EXISTS users(" +
-                    "id INTEGER " + (db.isSQLite() ? "" : "UNSIGNED") + "PRIMARY KEY " + db.getAutoInc(conn) + ", " +
+                    "id INTEGER " + (db.isSQLite() ? "" : "UNSIGNED ") + "PRIMARY KEY " + db.getAutoInc(conn) + ", " +
                     "uuid VARCHAR(36) NOT NULL)");
             ps.execute();
             ps.close();
