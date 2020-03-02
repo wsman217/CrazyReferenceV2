@@ -3,10 +3,12 @@ package me.wsman217.crazyreference.database.invites;
 import me.wsman217.crazyreference.database.DataBase;
 import me.wsman217.crazyreference.tools.GenericTools;
 import org.bukkit.ChatColor;
+import org.bukkit.entity.Player;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.SQLException;
+import java.sql.Timestamp;
 
 public class DataHandlerInvites {
     private DataBase db;
@@ -33,5 +35,28 @@ public class DataHandlerInvites {
             e.printStackTrace();
         }
         return this;
+    }
+
+    public static class InviteHolder {
+        private Timestamp time;
+        private String referrer, referee;
+
+        public InviteHolder(String referrer, String referee, Timestamp time) {
+            this.time = time;
+            this.referrer = referrer;
+            this.referee = referee;
+        }
+
+        public String getTime() {
+            return time.toString();
+        }
+
+        public String getReferrer() {
+            return referrer;
+        }
+
+        public String getReferee() {
+            return referee;
+        }
     }
 }

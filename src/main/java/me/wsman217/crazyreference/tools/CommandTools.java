@@ -17,6 +17,8 @@ public class CommandTools {
             sender.sendMessage(ChatColor.RED + "This command can only be used by a player!");
             return true;
         }
+        if (permission.length() == 0)
+            return false;
         Player p = (Player) sender;
         if (!p.hasPermission(permission)) {
             //todo add a messages.yml so you can change this.

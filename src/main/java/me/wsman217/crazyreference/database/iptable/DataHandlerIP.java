@@ -1,8 +1,11 @@
 package me.wsman217.crazyreference.database.iptable;
 
+import me.wsman217.crazyreference.CrazyReference;
 import me.wsman217.crazyreference.database.DataBase;
+import me.wsman217.crazyreference.database.users.DataHandlerUsers;
 import me.wsman217.crazyreference.tools.GenericTools;
 import org.bukkit.ChatColor;
+import org.bukkit.entity.Player;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
@@ -36,23 +39,39 @@ public class DataHandlerIP {
         return this;
     }
 
-    public ArrayList<UUID> getUsersByIp(String ip) {
+    public ArrayList<UUID> getUserByIP(String ip) {
         Connection conn = this.db.getConnection();
         ArrayList<UUID> uuids = new ArrayList<>();
         try {
-            PreparedStatement ps = conn.prepareStatement("SELECT * FROM ip_table WHERE address='" + ip + "'");
+            PreparedStatement ps = conn.prepareStatement("SELECT uuid FROM ip_table INNER JOIN" +
+                    "users ON (balance.user_id) WHERE ip='" + ip + "'");
             ResultSet rs = ps.executeQuery();
-            if (rs.next())
-                for (String str : rs.getString("address").split(","))
-                    uuids.add(UUID.fromString(str));
+            while (rs.next())
+                uuids.add(UUID.fromString(rs.getString("uuid")));
             ps.close();
+            rs.close();
             conn.close();
         } catch (SQLException e) {
             e.printStackTrace();
         }
-        return uuids;
+        return uuids.size() == 0 ? null : uuids;
     }
 
+    /*public void insert(Player p) {
+        Connection conn = this.db.getConnection();
+        DataHandlerUsers userHandler = CrazyReference.userHandler;
+        boolean inUsers = userHandler.contains(p);
+        try {
+            PreparedStatement ps = conn.prepareStatement("INSER INTO ip_table (user_id, address) " +
+                    "VALUES (" + (inUsers ? userHandler.getID(p) : userHandler.insert(p)) + ", " +
+                    p.")");
+
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+    }*/
+
+    /*
     public void insert(String ip, UUID id) {
         Connection conn = this.db.getConnection();
         try {
@@ -89,5 +108,5 @@ public class DataHandlerIP {
             e.printStackTrace();
         }
         return ips;
-    }
+    }*/
 }

@@ -1,12 +1,13 @@
-/*
-This is the beginnings of the final prize system but I just have kind of given up on it atm until I can get a sort of release first.
- */
-
 package me.wsman217.crazyreference.prizes;
+
+import me.wsman217.crazyreference.tools.FileManager;
+import org.bukkit.configuration.file.FileConfiguration;
+
+import java.util.HashMap;
 
 public class PrizeManager {
 
-    public PrizeManager() {
+    private FileManager fileManager;
+    private HashMap<String, FileConfiguration> files = new HashMap<>();
 
-    }
 }

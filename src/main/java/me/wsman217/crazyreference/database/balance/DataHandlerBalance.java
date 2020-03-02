@@ -75,7 +75,7 @@ public class DataHandlerBalance {
         try {
             PreparedStatement ps = conn.prepareStatement("INSERT INTO balance (user_id, balance) " +
                     "VALUES (" + (inUsers ? userHandler.getID(p) : userHandler.insert(p)) + ", " +
-                    "" + startingBal + ")");
+                    startingBal + ")");
         } catch (SQLException e) {
             e.printStackTrace();
         }
